@@ -28,29 +28,31 @@ New-PulumiYamlFile {
     }
     $website = New-AzureNativeStorageStorageAccountStaticWebsite @Props
 
-    "index.html", "404.html" | ForEach-Object {
+    @(
+        @{
+            Name = "index.html"
+            Type = "text/html"
+        },
+        @{
+            Name = "404.html"
+            Type = "text/html"
+        },
+        @{
+            Name = "favicon.png"
+            Type = "image/png"
+        }
+    ) | ForEach-Object {
         $Props = @{
-            pulumiid          = $_
+            pulumiid          = $_.Name
             ResourceGroupName = $resourceGroup.reference("name")
             AccountName       = $storageAccount.reference("name")
             ContainerName     = $website.reference("containerName")
-            contentType       = "text/html"
+            contentType       = $_.Type
             Type              = "Block"
-            Source            = New-PulumiFileAsset "./www/$_"
+            Source            = New-PulumiFileAsset "./www/$($_.Name)"
         }
         $null = New-AzureNativeStorageStorageBlob @Props
     }
-  
-    $Props = @{
-        pulumiid          = "favicon.png"
-        ResourceGroupName = $resourceGroup.reference("name")
-        AccountName       = $storageAccount.reference("name")
-        ContainerName     = $website.reference("containerName")
-        contentType       = "image/png"
-        Type              = "Block"
-        Source            = New-PulumiFileAsset "./www/favicon.png"
-    }
-    $null = New-AzureNativeStorageStorageBlob @Props
 
     $keys = Invoke-AzureNativeStorageListStorageAccountKeys -accountName $storageAccount.reference("name") -resourceGroupName $resourceGroup.reference("name")
 
