@@ -185,7 +185,9 @@ param(
 [Parameter()]
 [System.IO.FileInfo]$VariableFile,
 [Parameter()]
-[System.IO.DirectoryInfo]$OutPath
+[System.IO.DirectoryInfo]$OutPath,
+[Parameter(ParameterSetName='Destroy')]
+[Switch]$Destroy
     )
 
 BEGIN {
@@ -206,10 +208,19 @@ BEGIN {
                ApplyToExecutable = $False
                NoGap = $True
                }
+         Destroy = @{
+               OriginalName = '--destroy'
+               OriginalPosition = '2'
+               Position = '2147483647'
+               ParameterType = 'Switch'
+               ApplyToExecutable = $False
+               NoGap = $False
+               }
     }
 
     $__outputHandlers = @{
-        Default = @{ StreamOutput = $False; Handler = { $args[0] | ConvertFrom-Json } }
+        Default = @{ StreamOutput = $False; Handler = { $args[0] | ConvertFrom-Json | Where-Object type -eq 'planned_change' | Select-Object -ExpandProperty change } }
+        Destroy = @{ StreamOutput = $False; Handler = { Write-Host ('{0}You selected destroy, this will delete all your stuff:{1}' -f $PSStyle.Foreground.red, $PSStyle.Reset);$args[0] | ConvertFrom-Json | Where-Object type -eq 'planned_change' | Select-Object -ExpandProperty change } }
     }
 }
 
@@ -323,6 +334,10 @@ Path to a terraform variable file
 Path where the plan file should be output to
 
 
+.PARAMETER Destroy
+Plan for destroying all the things
+
+
 
 #>
 }
@@ -334,7 +349,7 @@ function ParseTerraformApply {
         $input
     )
     process {
-        $input | ConvertFrom-Json #| select -ExpandProperty "@message"
+        $input | ConvertFrom-Json | Where-Object type -eq 'planned_change' | Select-Object -ExpandProperty change
     }
 }
 
