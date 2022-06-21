@@ -14,7 +14,7 @@ function Deploy-StorageAccountAsApprovedByCompanyInfrastructureSecurity {
         $resourceGroup = New-AzureNativeResourcesResourceGroup -pulumiid "$ProjectName-$approvedLocation" -resourceGroupName "$ProjectName-$approvedLocation" -location $approvedLocation
 
         $Props = @{
-            pulumiid          = "sa"
+            pulumiid          = "sa-$approvedLocation"
             accountName       = "$($ProjectName)sa".ToLower()
             ResourceGroupName = $resourceGroup.reference("name")
             location          = $approvedLocation

@@ -1,12 +1,12 @@
 Import-Module pspulumiyaml.azurenative.resources
 Import-Module pspulumiyaml.azurenative.storage
-. ./Deploy-StorageAccountAsApprovedByCompanyInfrastructureSecurity
+. "$PSScriptRoot/Deploy-StorageAccountAsApproved.ps1"
 
 New-PulumiYamlFile {
 
     $storageAccounts = Deploy-StorageAccountAsApprovedByCompanyInfrastructureSecurity -ProjectName "psconfpulumidemo"
 
-    foreach ($location in $storageAccounts.keys) {
+    foreach ($location in $storageAccounts.Keys) {
 
         $resourceGroup = $storageAccounts.$location.ResourceGroup
         $storageAccount = $storageAccounts.$location.StorageAccount
@@ -43,10 +43,10 @@ New-PulumiYamlFile {
                 Type              = "Block"
                 Source            = New-PulumiFileAsset "./www/$($_.Name)"
             }
-            $null = New-AzureNativeStorageStorageBlob @Props
+            $null = New-AzureNativeStorageBlob @Props
         }
 
-        $keys = Invoke-AzureNativeStorageListStorageAccountKeys -accountName $storageAccount.reference("name") -resourceGroupName $resourceGroup.reference("name")
+        $keys = Invoke-AzureNativeFunctionStorageListStorageAccountKeys -accountName $storageAccount.reference("name") -resourceGroupName $resourceGroup.reference("name")
 
         New-PulumiOutput -Name "website-url-$location" -Value $storageAccount.reference("primaryEndpoints.web")
         New-PulumiOutput -Name "primarykey-$location" -Value $keys.reference("keys[0].value")

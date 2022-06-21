@@ -51,10 +51,10 @@ New-PulumiYamlFile {
             Type              = "Block"
             Source            = New-PulumiFileAsset "./www/$($_.Name)"
         }
-        $null = New-AzureNativeStorageStorageBlob @Props
+        $null = New-AzureNativeStorageBlob @Props
     }
 
-    $keys = Invoke-AzureNativeStorageListStorageAccountKeys -accountName $storageAccount.reference("name") -resourceGroupName $resourceGroup.reference("name")
+    $keys = Invoke-AzureNativeFunctionStorageListStorageAccountKeys -accountName $storageAccount.reference("name") -resourceGroupName $resourceGroup.reference("name")
 
     New-PulumiOutput -Name test -Value $storageAccount.reference("primaryEndpoints.web")
     New-PulumiOutput -Name primarykey -Value $keys.reference("keys[0].value")
