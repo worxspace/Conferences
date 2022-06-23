@@ -1,0 +1,141 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2021-11",
+  "Commands": [
+    {
+      "Verb": "get",
+      "Noun": "AzCliAccount",
+      "OriginalName": "az",
+      "OriginalCommandElements": [
+        "account",
+        "list"
+      ],
+      "Platform": [
+        "Windows",
+        "Linux",
+        "MacOS"
+      ],
+      "Elevation": null,
+      "Aliases": null,
+      "DefaultParameterSetName": null,
+      "SupportsShouldProcess": false,
+      "ConfirmImpact": null,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "Get a list of subscriptions for the logged in account. By default, only",
+      "Usage": null,
+      "Parameters": [
+        {
+          "ParameterType": "string",
+          "Position": 2147483647,
+          "Name": "all",
+          "OriginalName": "--all",
+          "OriginalText": null,
+          "Description": "List all subscriptions from all clouds, rather than just 'Enabled' ones.",
+          "DefaultValue": null,
+          "DefaultMissingValue": null,
+          "ApplyToExecutable": false,
+          "AdditionalParameterAttributes": null,
+          "Mandatory": false,
+          "ParameterSetName": null,
+          "Aliases": null,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": false
+        },
+        {
+          "ParameterType": "string",
+          "Position": 2147483647,
+          "Name": "refresh",
+          "OriginalName": "--refresh",
+          "OriginalText": null,
+          "Description": "Retrieve up-to-date subscriptions from server.",
+          "DefaultValue": null,
+          "DefaultMissingValue": null,
+          "ApplyToExecutable": false,
+          "AdditionalParameterAttributes": null,
+          "Mandatory": false,
+          "ParameterSetName": null,
+          "Aliases": null,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": false
+        },
+        {
+          "ParameterType": "string",
+          "Position": 2147483647,
+          "Name": "onlyshowerror",
+          "OriginalName": "--only-show-error",
+          "OriginalText": null,
+          "Description": "Only show errors, suppressing warnings.",
+          "DefaultValue": null,
+          "DefaultMissingValue": null,
+          "ApplyToExecutable": false,
+          "AdditionalParameterAttributes": null,
+          "Mandatory": false,
+          "ParameterSetName": null,
+          "Aliases": null,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": false
+        },
+        {
+          "ParameterType": "string",
+          "Position": 2147483647,
+          "Name": "output",
+          "OriginalName": "--output",
+          "OriginalText": null,
+          "Description": "Output format.  Allowed values: json, jsonc, none, table, tsv, yaml, yamlc.Default: json.",
+          "DefaultValue": null,
+          "DefaultMissingValue": null,
+          "ApplyToExecutable": false,
+          "AdditionalParameterAttributes": null,
+          "Mandatory": false,
+          "ParameterSetName": null,
+          "Aliases": null,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": false
+        },
+        {
+          "ParameterType": "string",
+          "Position": 2147483647,
+          "Name": "query",
+          "OriginalName": "--query",
+          "OriginalText": null,
+          "Description": "JMESPath query string. See http://jmespath.org/ for more information andexamples.",
+          "DefaultValue": null,
+          "DefaultMissingValue": null,
+          "ApplyToExecutable": false,
+          "AdditionalParameterAttributes": null,
+          "Mandatory": false,
+          "ParameterSetName": null,
+          "Aliases": null,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": false
+        }
+      ],
+      "Examples": [],
+      "OriginalText": " Command     az account list : Get a list of subscriptions for the logged in account. By default, only     'Enabled' subscriptions from the current cloud is shown.  Arguments     --all              : List all subscriptions from all clouds, rather than just 'Enabled' ones.     --refresh          : Retrieve up-to-date subscriptions from server.  Global Arguments     --debug            : Increase logging verbosity to show all debug logs.     --help -h          : Show this help message and exit.     --only-show-errors : Only show errors, suppressing warnings.     --output -o        : Output format.  Allowed values: json, jsonc, none, table, tsv, yaml, yamlc.                          Default: json.     --query            : JMESPath query string. See http://jmespath.org/ for more information and                          examples.     --verbose          : Increase logging verbosity. Use --debug for full debug logs.  To search AI knowledge base for examples, use: az find \"az account list\" ",
+      "HelpLinks": null,
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "$args[0] | out-string | ConvertFrom-Json",
+          "HandlerType": "Inline",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}

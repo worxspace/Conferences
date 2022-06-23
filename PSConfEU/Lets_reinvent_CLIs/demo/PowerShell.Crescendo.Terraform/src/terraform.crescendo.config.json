@@ -118,43 +118,6 @@
                     "Handler": "ParseTerraformApply"
                 }
             ]
-        },
-        {
-            "Verb": "Remove",
-            "Noun": "TerraformResource",
-            "OriginalName": "terraform",
-            "OriginalCommandElements": [
-                "apply",
-                "-destroy",
-                "--json",
-                "--input=false",
-                "--auto-approve"
-            ],
-            "Parameters": [
-                {
-                    "OriginalName": "--var-file=",
-                    "Name": "VariableFile",
-                    "ParameterType": "System.IO.FileInfo",
-                    "OriginalPosition": 0,
-                    "NoGap": true,
-                    "Description": "Path to a terraform variable file"
-                },
-                {
-                    "OriginalName": "",
-                    "Name": "PlanfilePath",
-                    "ParameterType": "System.IO.FileInfo",
-                    "OriginalPosition": 1,
-                    "Description": "Path where a previously created plan file is stored"
-                }
-            ],
-            "OutputHandlers": [
-                {
-                    "ParameterSetName": "Default",
-                    "HandlerType": "Function",
-                    "StreamOutput": true,
-                    "Handler": "ParseTerraformDestroy"
-                }
-            ]
         }
     ]
 }

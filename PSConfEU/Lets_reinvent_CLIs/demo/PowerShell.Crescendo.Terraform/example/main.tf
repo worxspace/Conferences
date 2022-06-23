@@ -27,7 +27,7 @@ resource "azurerm_storage_blob" "tfcrescendeodemo-sbindex" {
 }
 
 resource "azurerm_storage_blob" "tfcrescendeodemo-sb404" {
-  name                   = "404.html"
+  name                   = "418.html"
   storage_account_name   = azurerm_storage_account.tfcrescendeodemo-sa.name
   storage_container_name = "$web"
   content_type           = "text/html"
@@ -37,6 +37,24 @@ resource "azurerm_storage_blob" "tfcrescendeodemo-sb404" {
 
 resource "azurerm_storage_blob" "tfcrescendeodemo-sbfavicon" {
   name                   = "favicon.png"
+  storage_account_name   = azurerm_storage_account.tfcrescendeodemo-sa.name
+  storage_container_name = "$web"
+  content_type           = "image/png"
+  type                   = "Block"
+  source                 = "./www/favicon.png"
+}
+
+resource "azurerm_storage_blob" "random1" {
+  name                   = "random1.png"
+  storage_account_name   = azurerm_storage_account.tfcrescendeodemo-sa.name
+  storage_container_name = "$web"
+  content_type           = "image/png"
+  type                   = "Block"
+  source                 = "./www/favicon.png"
+}
+
+resource "azurerm_storage_blob" "random2" {
+  name                   = "random2.png"
   storage_account_name   = azurerm_storage_account.tfcrescendeodemo-sa.name
   storage_container_name = "$web"
   content_type           = "image/png"
